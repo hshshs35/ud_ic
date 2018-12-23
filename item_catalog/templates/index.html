@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="jumbotron">
+        <ul>
+            {% for catalog in catalogs %}
+                <li><a href="{{ url_for('catalogs.get_catalog', catalog_id=catalog.id) }}">{{ catalog.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

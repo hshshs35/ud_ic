@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="jumbotron">
+        <h1>Catalog Name: {{ catalog.name }}</h1>
+        <h2>Catalog Description:</h2>
+        <p>{{ catalog.description }}</p>
+        <ul>
+            {% for item in items %}
+                <li><a href="{{ url_for('items.get_item', item_id=item.id) }}">{{item.name}}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

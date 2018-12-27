@@ -1,7 +1,6 @@
 from item_catalog import db, login_manager
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-from flask import jsonify
 
 
 @login_manager.user_loader
@@ -49,12 +48,11 @@ class Catalog(db.Model):
     @property
     def serialize(self):
         return {
-            'name':self.name,
+            'name': self.name,
             'description': self.description,
             'id': self.id,
             'items': self.has_items
         }
-
 
 
 class Item(db.Model):
@@ -64,12 +62,15 @@ class Item(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100))
     description = db.Column(db.String(200))
-    catalog_id = db.Column(db.Integer, db.ForeignKey('catalogs.id'), nullable=False)
+    catalog_id = db.Column(db.Integer,
+                           db.ForeignKey('catalogs.id'), nullable=False)
+    creator_id = db.Column(db.String(100))
 
-    def __init__(self, name, description, catalog_id):
+    def __init__(self, name, description, catalog_id, creator_id):
         self.name = name
         self.description = description
         self.catalog_id = catalog_id
+        self.creator_id = creator_id
 
     def __repr__(self):
         return f'<Item {self.name}>'
@@ -82,5 +83,3 @@ class Item(db.Model):
             'id': self.id,
             'catalog_id': self.catalog_id
         }
-
-

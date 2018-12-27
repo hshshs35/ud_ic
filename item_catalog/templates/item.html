@@ -4,7 +4,7 @@
     <div class="jumbotron">
         <h1>{{ item.name }}</h1>
         <p>{{ item.description }}</p>
-        {% if current_user.is_authenticated %}
+        {% if is_login %}
             <a href="{{ url_for('items.edit_item', item_id=item.id) }}">Edit</a>
             <a href="{{ url_for('items.delete_item', item_id=item.id) }}">Delete</a>
             <a href="{{ url_for('catalogs.get_catalog', catalog_id=item.catalog_id) }}">Back</a>

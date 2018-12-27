@@ -19,12 +19,13 @@ db = SQLAlchemy(app)
 Migrate(app, db)
 
 # set up the login config
+# local login and signup are not used anymore since the app switched to the oauth login
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'users.login'
 
+# import blueprints
 from item_catalog.core.views import core
-from item_catalog.users.views import users
 from item_catalog.users.oauth_views import blueprint
 from item_catalog.users.oauth_views import oauth
 from item_catalog.items.views import items
@@ -34,7 +35,6 @@ from item_catalog.errors.error_handler import errors
 # register routes
 app.register_blueprint(errors)
 app.register_blueprint(core)
-app.register_blueprint(users)
 app.register_blueprint(items)
 app.register_blueprint(catalogs)
 app.register_blueprint(blueprint, url_prefix='/login')

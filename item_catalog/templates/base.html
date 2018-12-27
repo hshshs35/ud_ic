@@ -13,7 +13,7 @@
         <li class="nav-link">
             <a href="{{ url_for('core.index')}}">Home</a>
         </li>
-        {% if current_user.is_authenticated %}
+        {% if is_login %}
         <li class="nav-link">
             <a href="{{ url_for('oauth.logout')}}">Log Out</a>
             <a href="{{ url_for('items.create_item')}}">Create New Item</a>
@@ -21,9 +21,6 @@
         {% else %}
         <li class="nav-link">
             <a href="{{ url_for('oauth.login')}}">Log In</a>
-        </li>
-        <li class="nav-link">
-            <a href="{{ url_for('users.signup')}}">Sign Up</a>
         </li>
         {% endif %}
     </ul>

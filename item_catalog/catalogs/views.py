@@ -3,6 +3,7 @@ from flask import render_template, url_for, flash, \
 
 from item_catalog.models import Item, Catalog
 from flask import jsonify
+from flask_dance.contrib.google import google
 
 catalogs = Blueprint('catalogs', __name__)
 
@@ -12,10 +13,10 @@ catalogs = Blueprint('catalogs', __name__)
 def get_catalog(catalog_id):
     catalog = Catalog.query.filter_by(id=catalog_id).first()
     items = Item.query.filter_by(catalog_id=catalog_id).all()
-    return render_template('catalog.html', catalog=catalog, items=items)
+    return render_template('catalog.html', catalog=catalog, items=items, is_login=google.authorized)
 
 
-# catalog api
+# catalog json api
 @catalogs.route('/catalogs.json')
 def catalog_api():
     res = []

@@ -8,12 +8,14 @@ from flask_login import current_user
 from item_catalog.models import User
 
 
+# login form
 class LoginForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Log In')
 
 
+# signup form
 class SignUpForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired(), EqualTo('pwd_confirm', message='Password does not match')])
